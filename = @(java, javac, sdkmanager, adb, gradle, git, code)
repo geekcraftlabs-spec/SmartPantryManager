@@ -1,0 +1,34 @@
+[33mcommit 6387dfb58c6d4fffd37a36c1a0ad1d61ac552374[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: geekcraftlabs-spec <geekcraftlabs@gmail.com>
+Date:   Sun Oct 18 14:56:00 2026 +0200
+
+    Initial Android project scaffold with Gradle build files and Java package structure
+
+ .gitignore                                          |  9 [32m+++++++++[m
+ README.md                                           |  4 [32m++++[m
+ app/build.gradle                                    | 21 [32m+++++++++++++++++++++[m
+ app/proguard-rules.pro                              |  0
+ .../smartpantry/adapters/IngredientAdapter.java     |  2 [32m++[m
+ .../example/smartpantry/adapters/RecipeAdapter.java |  2 [32m++[m
+ .../example/smartpantry/data/PantryDbHelper.java    |  2 [32m++[m
+ .../com/example/smartpantry/data/RecipeSeeder.java  |  2 [32m++[m
+ .../smartpantry/matching/IngredientNormalizer.java  |  2 [32m++[m
+ .../example/smartpantry/matching/MatchResult.java   |  2 [32m++[m
+ .../example/smartpantry/matching/PantryMatcher.java |  2 [32m++[m
+ .../com/example/smartpantry/model/Ingredient.java   |  2 [32m++[m
+ .../java/com/example/smartpantry/model/Recipe.java  |  2 [32m++[m
+ .../example/smartpantry/model/RecipeIngredient.java |  2 [32m++[m
+ .../smartpantry/ui/AddEditIngredientActivity.java   |  2 [32m++[m
+ .../com/example/smartpantry/ui/MainActivity.java    |  2 [32m++[m
+ .../com/example/smartpantry/ui/PantryFragment.java  |  2 [32m++[m
+ .../smartpantry/ui/RecipeDetailActivity.java        |  2 [32m++[m
+ .../example/smartpantry/ui/SettingsFragment.java    |  2 [32m++[m
+ .../smartpantry/ui/SuggestedRecipesFragment.java    |  2 [32m++[m
+ app/src/main/res/drawable/.gitkeep                  |  0
+ app/src/main/res/layout/.gitkeep                    |  0
+ app/src/main/res/menu/.gitkeep                      |  0
+ app/src/main/res/values/.gitkeep                    |  0
+ build.gradle                                        |  3 [32m+++[m
+ gradle.properties                                   |  3 [32m+++[m
+ settings.gradle                                     | 16 [32m++++++++++++++++[m
+ 27 files changed, 88 insertions(+)
