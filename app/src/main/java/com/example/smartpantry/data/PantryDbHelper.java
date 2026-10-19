@@ -1,11 +1,13 @@
 package com.example.smartpantry.data;
 
 import android.content.Context;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.smartpantry.model.Recipe;
+import com.example.smartpantry.model.Ingredient;
 import com.example.smartpantry.model.RecipeIngredient;
 
 import java.util.ArrayList;
@@ -158,5 +160,79 @@ public class PantryDbHelper extends SQLiteOpenHelper {
             cursor.close();
         }
         return list;
+    }
+
+        // ------------------------------------------------------------------
+    // Ingredient CRUD
+    // ------------------------------------------------------------------
+
+    public long insertIngredient(Ingredient ingredient) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_NAME, ingredient.getName());
+        values.put(COL_QTY, ingredient.getQuantity());
+        values.put(COL_UNIT, ingredient.getUnit());
+        values.put(COL_EXPIRY, ingredient.getExpiryDate());
+        return db.insert(TABLE_INGREDIENTS, null, values);
+    }
+
+    public int updateIngredient(Ingredient ingredient) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_NAME, ingredient.getName());
+        values.put(COL_QTY, ingredient.getQuantity());
+        values.put(COL_UNIT, ingredient.getUnit());
+        values.put(COL_EXPIRY, ingredient.getExpiryDate());
+        return db.update(TABLE_INGREDIENTS, values,
+                COL_ID + " = ?", new String[]{String.valueOf(ingredient.getId())});
+    }
+
+    public int deleteIngredient(long id) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.delete(TABLE_INGREDIENTS,
+                COL_ID + " = ?", new String[]{String.valueOf(id)});
+    }
+
+    public Ingredient getIngredient(long id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(TABLE_INGREDIENTS, null,
+                COL_ID + " = ?", new String[]{String.valueOf(id)},
+                null, null, null);
+        try {
+            if (cursor.moveToFirst()) {
+                return readIngredient(cursor);
+            }
+        } finally {
+            cursor.close();
+        }
+        return null;
+    }
+
+    public List<Ingredient> getAllIngredients() {
+        List<Ingredient> list = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(TABLE_INGREDIENTS, null, null, null,
+                null, null, COL_NAME + " COLLATE NOCASE ASC");
+        try {
+            while (cursor.moveToNext()) {
+                list.add(readIngredient(cursor));
+            }
+        } finally {
+            cursor.close();
+        }
+        return list;
+    }
+
+    private Ingredient readIngredient(Cursor cursor) {
+        Ingredient ingredient = new Ingredient();
+        ingredient.setId(cursor.getLong(cursor.getColumnIndexOrThrow(COL_ID)));
+        ingredient.setName(cursor.getString(cursor.getColumnIndexOrThrow(COL_NAME)));
+        ingredient.setQuantity(cursor.getDouble(cursor.getColumnIndexOrThrow(COL_QTY)));
+        ingredient.setUnit(cursor.getString(cursor.getColumnIndexOrThrow(COL_UNIT)));
+        int expiryIndex = cursor.getColumnIndexOrThrow(COL_EXPIRY);
+        if (!cursor.isNull(expiryIndex)) {
+            ingredient.setExpiryDate(cursor.getString(expiryIndex));
+        }
+        return ingredient;
     }
 }
