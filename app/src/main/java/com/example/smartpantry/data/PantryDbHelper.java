@@ -74,7 +74,7 @@ public class PantryDbHelper extends SQLiteOpenHelper {
                 COL_NAME + " TEXT NOT NULL, " +
                 COL_INSTRUCTIONS + " TEXT NOT NULL)");
 
-        db.execSQL("CREATE TABLE " + TABLE_RECIPE_INGREDIENTS + " (" +
+                db.execSQL("CREATE TABLE " + TABLE_RECIPE_INGREDIENTS + " (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL_RECIPE_ID + " INTEGER NOT NULL, " +
                 COL_ING_NAME + " TEXT NOT NULL, " +
@@ -82,6 +82,9 @@ public class PantryDbHelper extends SQLiteOpenHelper {
                 COL_UNIT + " TEXT NOT NULL, " +
                 "FOREIGN KEY(" + COL_RECIPE_ID + ") REFERENCES " +
                 TABLE_RECIPES + "(" + COL_ID + ") ON DELETE CASCADE)");
+
+        // Seed the starter recipe collection on first run.
+        RecipeSeeder.seed(db);
     }
 
     @Override
