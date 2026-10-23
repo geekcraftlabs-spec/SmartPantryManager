@@ -11,8 +11,8 @@
     <string name="title_recipe_detail">Recipe</string>
 
     <string name="pantry_empty">Your pantry is empty.\nTap + to add your first ingredient.</string>
-    <string name="suggested_empty">No recipes match your pantry yet — add more ingredients.</string>
-    <string name="almost_empty">Nothing is one ingredient away right now.</string>
+    <string name="suggested_empty">No recipes match your pantry yet. Add more ingredients to unlock suggestions.</string>
+    <string name="almost_empty">Nothing is one ingredient away - keep adding to your pantry.</string>
 
     <string name="section_can_cook">You can cook these now</string>
     <string name="section_almost">Almost there (one ingredient missing)</string>
