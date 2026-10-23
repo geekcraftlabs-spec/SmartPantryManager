@@ -118,3 +118,14 @@ A 5-7 minute walkthrough video is included in the submission ZIP. It covers:
 ## Author
 
 Geekcraft Labs.
+## Troubleshooting
+
+- If `gradlew.bat` fails with "SDK location not found", create
+  `local.properties` in the project root containing:
+      sdk.dir=C:/android-sdk
+- If the emulator shows a black screen after boot, tap the screen once to
+  wake it.
+- If `adb` reports `no devices/emulators found`, run `adb kill-server` then
+  `adb start-server`, then `adb devices` again.
+- If the emulator crashes on boot, restart it with:
+      emulator -avd PantryPixel -gpu host -no-snapshot-load
